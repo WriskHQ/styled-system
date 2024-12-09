@@ -69,7 +69,5 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "react-scripts": "^3.0.1"
-  }
+  "dependencies": {}
 }
