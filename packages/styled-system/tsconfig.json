@@ -1,0 +1,25 @@
+{
+  "include": ["src", "types"],
+  "exclude": [
+    "src/**/*.spec.tsx",
+    "src/**/*.test.tsx",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "./dist/esm",
+    "declarationDir": "dist/types",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "allowJs": true,
+    "jsx": "react",
+    "importHelpers": true,
+    "declaration": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}

@@ -1,4 +1,4 @@
-import { system, compose } from '..'
+import { system } from '../system'
 
 const theme = {
   colors: {

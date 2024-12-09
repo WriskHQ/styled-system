@@ -1,5 +1,5 @@
 {
-  "name": "styled-system",
+  "name": "@wrisk/styled-system",
   "version": "5.1.5",
   "description": "Responsive, theme-based style props for building design systems with React",
   "main": "dist/index.js",
@@ -10,24 +10,30 @@
     "styled-components",
     "emotion"
   ],
+  "scripts": {
+    "build": "tsc -b"
+  },
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
     "@emotion/core": "^10.0.10",
+    "@emotion/is-prop-valid": "^0.8.1",
+    "@emotion/memoize": "^0.7.1",
     "color": "^3.1.0",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.1",
     "lodash.omit": "^4.5.0",
     "lodash.set": "^4.3.2",
-    "@emotion/is-prop-valid": "^0.8.1",
-    "@emotion/memoize": "^0.7.1",
-    "styled-system": "^5.1.5",
-    "prop-types": "^15.7.2"
+    "object-assign": "^4.1.1",
+    "prop-types": "^15.7.2",
+    "styled-system": "^5.1.5"
   },
   "gitHead": "a6feb6009c58f2eb68f0c3120c5672f6cb54294f",
   "devDependencies": {
     "@emotion/styled": "^10.0.14",
+    "csstype": "^3.0.2",
     "jest-styled-components": "^7.0.0",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "typescript": "^5.7.2"
   }
 }
