@@ -13,18 +13,16 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "dependencies": {
-    "@styled-system/background": "^5.1.2",
-    "@styled-system/border": "^5.1.5",
-    "@styled-system/color": "^5.1.2",
-    "@styled-system/core": "^5.1.2",
-    "@styled-system/flexbox": "^5.1.2",
-    "@styled-system/grid": "^5.1.2",
-    "@styled-system/layout": "^5.1.2",
-    "@styled-system/position": "^5.1.2",
-    "@styled-system/shadow": "^5.1.2",
-    "@styled-system/space": "^5.1.2",
-    "@styled-system/typography": "^5.1.2",
-    "@styled-system/variant": "^5.1.5"
+    "@emotion/core": "^10.0.10",
+    "color": "^3.1.0",
+    "lodash.get": "^4.4.2",
+    "lodash.merge": "^4.6.1",
+    "lodash.omit": "^4.5.0",
+    "lodash.set": "^4.3.2",
+    "@emotion/is-prop-valid": "^0.8.1",
+    "@emotion/memoize": "^0.7.1",
+    "styled-system": "^5.1.5",
+    "prop-types": "^15.7.2"
   },
   "gitHead": "a6feb6009c58f2eb68f0c3120c5672f6cb54294f",
   "devDependencies": {

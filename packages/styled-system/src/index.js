@@ -1,13 +1,15 @@
-import { createStyleFunction, createParser } from '@styled-system/core'
+import { createStyleFunction, createParser } from './core'
 // v4 api shims
-import layout from '@styled-system/layout'
-import color from '@styled-system/color'
-import typography from '@styled-system/typography'
-import flexbox from '@styled-system/flexbox'
-import grid from '@styled-system/grid'
-import border from '@styled-system/border'
-import background from '@styled-system/background'
-import position from '@styled-system/position'
+import {
+  layout,
+  color,
+  typography,
+  flexbox,
+  grid,
+  border,
+  background,
+  position
+} from './parsers'
 
 export {
   get,
@@ -17,23 +19,23 @@ export {
   system,
 } from '@styled-system/core'
 
-export { margin, padding, space } from '@styled-system/space'
-export { color } from '@styled-system/color'
-export { layout } from '@styled-system/layout'
-export { typography } from '@styled-system/typography'
-export { flexbox } from '@styled-system/flexbox'
-export { border } from '@styled-system/border'
-export { background } from '@styled-system/background'
-export { position } from '@styled-system/position'
-export { grid } from '@styled-system/grid'
-export { shadow } from '@styled-system/shadow'
+export { margin, padding, space } from './parsers'
+export { color } from './parsers'
+export { layout } from './parsers'
+export { typography } from './parsers'
+export { flexbox } from './parsers'
+export { border } from './parsers'
+export { background } from './parsers'
+export { position } from './parsers'
+export { grid } from './parsers'
+export { shadow } from './parsers'
 export { default as boxShadow, default as textShadow } from '@styled-system/shadow'
 
 export {
   variant,
   buttonStyle,
   textStyle,
-  colorStyle
+  colorStyle,
 } from '@styled-system/variant'
 
 const {
@@ -48,7 +50,7 @@ const {
   display,
   overflow,
   overflowX,
-  overflowY
+  overflowY,
 } = layout
 const { opacity } = color
 const {
@@ -189,15 +191,15 @@ export {
 
 // v4 style API shim
 export const style = ({
-  prop,
-  cssProperty,
-  alias,
-  key,
-  transformValue,
-  scale,
-  // new api
-  properties,
-}) => {
+                        prop,
+                        cssProperty,
+                        alias,
+                        key,
+                        transformValue,
+                        scale,
+                        // new api
+                        properties,
+                      }) => {
   const config = {}
   config[prop] = createStyleFunction({
     properties,
