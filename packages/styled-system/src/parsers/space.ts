@@ -1,13 +1,13 @@
 import { get, system, compose, SystemConfig } from '../core'
-import { RequiredTheme, ResponsiveValue, Theme, ThemeValue } from '../types'
+import { RequiredTheme, ResponsiveValue, Scale, Theme, ThemeValue } from '../types'
 
 const defaults = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
 }
 
-const isNumber = (n) => typeof n === 'number' && !isNaN(n)
+const isNumber = (n: unknown): n is number => typeof n === 'number' && !isNaN(n)
 
-const getMargin = (n, scale) => {
+const getMargin = (n: string | number, scale: Scale | undefined) => {
   if (!isNumber(n)) {
     return get(scale, n, n)
   }

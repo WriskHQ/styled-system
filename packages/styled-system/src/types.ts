@@ -1,15 +1,13 @@
 import * as CSS from 'csstype'
 
 type TransformType = (
-  scale: Scale | undefined,
   path: string | number,
+  scale: Scale | undefined,
   fallback?: string | number | ObjectOrArray<string | number> | null,
-  props?: Record<string, string | number | boolean>
+  props?: Record<string, string | number | boolean>,
 ) => ObjectOrArray<string | number> | string | number
 
-export type ObjectOrArray<T, K extends keyof any = keyof any> =
-  | T[]
-  | Record<K, T | Record<K, T> | T[]>
+export type ObjectOrArray<T, K extends keyof any = keyof any> = T[] | Record<K, T | Record<K, T> | T[]>
 
 export type Scale = ObjectOrArray<number | string>
 
@@ -64,11 +62,7 @@ export interface Theme<TLength = TLengthStyledSystem> {
 
 export type RequiredTheme = Required<Theme>
 
-export type ThemeValue<
-  K extends keyof ThemeType,
-  ThemeType,
-  TVal = any,
-> = ThemeType[K] extends TVal[]
+export type ThemeValue<K extends keyof ThemeType, ThemeType, TVal = any> = ThemeType[K] extends TVal[]
   ? number
   : ThemeType[K] extends Record<infer E, TVal>
     ? E

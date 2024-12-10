@@ -284,7 +284,7 @@ describe('system', () => {
         property: 'margin',
         transform: (scale, n, props) => {
           const m = props['multiply'] || 1
-          return m * parseFloat(n.toString())
+          return m * (n as number)
         },
       },
     })
