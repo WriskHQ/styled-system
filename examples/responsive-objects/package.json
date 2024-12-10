@@ -1,5 +1,5 @@
 {
-  "name": "@styled-system/responsive-objects-example",
+  "name": "@wrisk/responsive-objects-example",
   "version": "5.0.0-7",
   "private": true,
   "dependencies": {
@@ -9,7 +9,7 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-scripts": "^3.0.0",
-    "styled-system": "^5.0.15"
+    "@wrisk/styled-system": "^5.0.15"
   },
   "scripts": {
     "start": "react-scripts start"

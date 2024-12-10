@@ -1,5 +1,5 @@
 {
-  "name": "@styled-system/svelte-example",
+  "name": "@wrisk/svelte-example",
   "private": true,
   "version": "5.0.0-7",
   "devDependencies": {
@@ -12,9 +12,9 @@
     "sirv-cli": "^0.4.4"
   },
   "dependencies": {
-    "@styled-system/css": "^5.0.13",
+    "@wrisk/styled-system": "^5.0.13",
     "emotion": "^10.0.9",
-    "styled-system": "^5.0.15",
+    "@wrisk/styled-system": "^5.0.15",
     "svelte": "^3.0.0"
   },
   "scripts": {

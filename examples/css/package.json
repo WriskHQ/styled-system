@@ -1,5 +1,5 @@
 {
-  "name": "@styled-system/css-basic-example",
+  "name": "@wrisk/css-basic-example",
   "version": "5.0.0-7",
   "private": true,
   "dependencies": {

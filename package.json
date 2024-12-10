@@ -1,7 +1,8 @@
 {
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "scripts": {
     "prettier": "prettier \"packages/**/{src,test,examples}/**/*.js\" --write",
