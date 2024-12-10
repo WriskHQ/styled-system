@@ -136,20 +136,16 @@ const transforms = [
     ...acc,
     [curr]: positiveOrNegative,
   }),
-  {}
+  {},
 )
 
 export const responsive = (styles: object) => (theme: object) => {
   const next = {}
   const breakpoints = get(theme, 'breakpoints', defaultBreakpoints)
-  const mediaQueries = [
-    null,
-    ...breakpoints.map((n) => `@media screen and (min-width: ${n})`),
-  ]
+  const mediaQueries = [null, ...breakpoints.map((n) => `@media screen and (min-width: ${n})`)]
 
   for (const key in styles) {
-    const value =
-      typeof styles[key] === 'function' ? styles[key](theme) : styles[key]
+    const value = typeof styles[key] === 'function' ? styles[key](theme) : styles[key]
 
     if (value == null) continue
     if (!Array.isArray(value)) {
@@ -171,15 +167,12 @@ export const responsive = (styles: object) => (theme: object) => {
   return next
 }
 
-const hasTheme = (value: { theme: Theme } | Theme): value is { theme: Theme } =>
-  value.hasOwnProperty('theme')
+const hasTheme = (value: { theme: Theme } | Theme): value is { theme: Theme } => value.hasOwnProperty('theme')
 
 export const css =
-  (args: SystemStyleObject): CssFunctionReturnType =>
+  (args?: SystemStyleObject): CssFunctionReturnType =>
   (props: Theme | { theme: Theme } = {}) => {
-    const theme = hasTheme(props)
-      ? { ...defaultTheme, ...props.theme }
-      : { ...defaultTheme, ...props }
+    const theme = hasTheme(props) ? { ...defaultTheme, ...props.theme } : { ...defaultTheme, ...props }
 
     let result = {}
 
