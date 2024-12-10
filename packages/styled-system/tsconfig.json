@@ -4,10 +4,7 @@
     "types"
   ],
   "exclude": [
-    "src/**/*.spec.tsx",
-    "src/**/*.test.tsx",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts"
+    "**/__tests__/*"
   ],
   "compilerOptions": {
     "rootDir": "src",

@@ -19,6 +19,8 @@ export {
   shadow as textShadow,
   shadow,
   ShadowProps,
+  space,
+  SpaceProps,
 } from './parsers'
 
 export {

@@ -32,6 +32,7 @@
     "@babel/register": "^7.4.0",
     "@types/jest": "^29.5.14",
     "husky": "^4.0.10",
+    "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "lerna": "^3.13.4",
     "lint-staged": "^10.0.0",
@@ -56,11 +57,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jxnblk/styled-system.git"
-  },
-  "husky": {
-    "hooks": {
-      "precommit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{js,md}": [

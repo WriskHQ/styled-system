@@ -1,4 +1,3 @@
-import assign from 'object-assign'
 import { merge } from './merge'
 import { get } from './get'
 import { ConfigStyle, Scale, StyleFunction } from '../types'
@@ -37,10 +36,10 @@ const parseResponsiveStyle = (
     const media = mediaQueries[i]
     const style = sx(value, scale, _props)
     if (!media) {
-      assign(styles, style)
+      Object.assign(styles, style)
     } else {
-      assign(styles, {
-        [media]: assign({}, styles[media], style),
+      Object.assign(styles, {
+        [media]: Object.assign({}, styles[media], style),
       })
     }
   })
@@ -60,11 +59,11 @@ const parseResponsiveObject = (
     const value = raw[key]
     const style = sx(value, scale, _props)
     if (!breakpoint) {
-      assign(styles, style)
+      Object.assign(styles, style)
     } else {
       const media = createMediaQuery(breakpoint)
-      assign(styles, {
-        [media]: assign({}, styles[media], style),
+      Object.assign(styles, {
+        [media]: Object.assign({}, styles[media], style),
       })
     }
   }
@@ -106,7 +105,7 @@ export const createParser = (config: ConfigStyle): StyleFunction => {
         continue
       }
 
-      assign(styles, sx(raw, scale, props))
+      Object.assign(styles, sx(raw, scale, props))
     }
 
     // sort object-based responsive styles

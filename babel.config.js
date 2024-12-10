@@ -1,13 +1,4 @@
 module.exports = {
-  presets: [['@babel/env', { loose: true }], '@babel/preset-react'],
-  // plugins: ['@babel/transform-runtime'],
-  env: {
-    esm: {
-      presets: [
-        ['@babel/env', { loose: true, modules: false }],
-        '@babel/preset-react',
-      ],
-      // plugins: [['@babel/transform-runtime', { useESModules: true }]],
-    },
-  },
+  presets: [['@babel/preset-env', { loose: true, modules: false }], '@babel/preset-typescript', '@babel/preset-react'],
+  ignore: ['**/__tests__/*'],
 }

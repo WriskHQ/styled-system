@@ -8,20 +8,24 @@ export type SystemConfig<T extends string = never> = Partial<
 >
 
 export const system = (args: SystemConfig<string> = {}): StyleFunction => {
-  const config: Record<string, StyleFunction> = Object.entries(args).reduce((acc, [key, value]) => {
-    return {
-      ...acc,
-      [key]:
-        typeof value === 'function'
-          ? value
-          : value === true
-            ? createStyleFunction({
-                property: key as keyof CSS.Properties,
-                scale: key,
-              })
-            : createStyleFunction(value),
+  const config = {}
+
+  Object.keys(args).forEach((key) => {
+    const conf = args[key]
+    if (conf === true) {
+      // shortcut definition
+      config[key] = createStyleFunction({
+        property: key as keyof CSS.Properties,
+        scale: key,
+      })
+      return
     }
-  }, {})
+    if (typeof conf === 'function') {
+      config[key] = conf
+      return
+    }
+    config[key] = createStyleFunction(conf)
+  })
 
   return createParser(config)
 }
