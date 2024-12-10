@@ -282,9 +282,9 @@ describe('system', () => {
     const parser = system({
       margin: {
         property: 'margin',
-        transform: (scale, n, props) => {
+        transform: (n, _, props) => {
           const m = props['multiply'] || 1
-          return m * (n as number)
+          return m * parseFloat(n.toString())
         },
       },
     })

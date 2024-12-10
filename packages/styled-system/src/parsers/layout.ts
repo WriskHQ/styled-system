@@ -3,7 +3,7 @@ import { Property } from 'csstype'
 import { RequiredTheme, ResponsiveValue, Scale, Theme, TLengthStyledSystem } from '../types'
 
 const isNumber = (n: unknown) => typeof n === 'number' && !isNaN(n)
-const getWidth = (scale?: Scale, n?: number) => get(scale, n, !isNumber(n) || n > 1 ? n : n * 100 + '%')
+const getWidth = (n: number, scale: Scale | undefined) => get(scale, n, !isNumber(n) || n > 1 ? n : n * 100 + '%')
 
 export interface WidthProps<ThemeType extends Theme = RequiredTheme, TVal = Property.Width<TLengthStyledSystem>> {
   width?: ResponsiveValue<TVal, ThemeType>
