@@ -1,6 +1,6 @@
 import assign from 'object-assign'
 
-export const merge = (a, b) => {
+export const merge = (a: Record<string, string | number | object>, b: Record<string, string | number | object>) => {
   let result = assign({}, a, b)
   for (const key in a) {
     if (!a[key] || typeof b[key] !== 'object') continue

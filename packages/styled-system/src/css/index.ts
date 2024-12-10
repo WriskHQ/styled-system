@@ -1,6 +1,8 @@
 import { get } from '../core'
+import { CssFunctionReturnType, SystemStyleObject } from './types'
+import { Theme } from '../types'
 
-const defaultBreakpoints = [40, 52, 64].map(n => n + 'em')
+const defaultBreakpoints = [40, 52, 64].map((n) => n + 'em')
 
 const defaultTheme = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -107,7 +109,7 @@ const scales = {
   stroke: 'colors',
 }
 
-const positiveOrNegative = (scale, value) => {
+const positiveOrNegative = (scale: object, value: string) => {
   if (typeof value !== 'number' || value >= 0) {
     return get(scale, value, value)
   }
@@ -134,15 +136,15 @@ const transforms = [
     ...acc,
     [curr]: positiveOrNegative,
   }),
-  {},
+  {}
 )
 
-export const responsive = styles => theme => {
+export const responsive = (styles: object) => (theme: object) => {
   const next = {}
   const breakpoints = get(theme, 'breakpoints', defaultBreakpoints)
   const mediaQueries = [
     null,
-    ...breakpoints.map(n => `@media screen and (min-width: ${n})`),
+    ...breakpoints.map((n) => `@media screen and (min-width: ${n})`),
   ]
 
   for (const key in styles) {
@@ -169,45 +171,52 @@ export const responsive = styles => theme => {
   return next
 }
 
-export const css = args => (props = {}) => {
-  const theme = { ...defaultTheme, ...(props.theme || props) }
-  let result = {}
-  const obj = typeof args === 'function' ? args(theme) : args
-  const styles = responsive(obj)(theme)
+const hasTheme = (value: { theme: Theme } | Theme): value is { theme: Theme } =>
+  value.hasOwnProperty('theme')
 
-  for (const key in styles) {
-    const x = styles[key]
-    const val = typeof x === 'function' ? x(theme) : x
+export const css =
+  (args: SystemStyleObject): CssFunctionReturnType =>
+  (props: Theme | { theme: Theme } = {}) => {
+    const theme = hasTheme(props)
+      ? { ...defaultTheme, ...props.theme }
+      : { ...defaultTheme, ...props }
 
-    if (key === 'variant') {
-      const variant = css(get(theme, val))(theme)
-      result = { ...result, ...variant }
-      continue
-    }
+    let result = {}
 
-    if (val && typeof val === 'object') {
-      result[key] = css(val)(theme)
-      continue
-    }
+    const obj = typeof args === 'function' ? args(theme) : args
+    const styles = responsive(obj)(theme)
 
-    const prop = get(aliases, key, key)
-    const scaleName = get(scales, prop)
-    const scale = get(theme, scaleName, get(theme, prop, {}))
-    const transform = get(transforms, prop, get)
-    const value = transform(scale, val, val)
+    for (const key in styles) {
+      const x = styles[key]
+      const val = typeof x === 'function' ? x(theme) : x
 
-    if (multiples[prop]) {
-      const dirs = multiples[prop]
-
-      for (let i = 0; i < dirs.length; i++) {
-        result[dirs[i]] = value
+      if (key === 'variant') {
+        const variant = css(get(theme, val))(theme)
+        result = { ...result, ...variant }
+        continue
       }
-    } else {
-      result[prop] = value
+
+      if (val && typeof val === 'object') {
+        result[key] = css(val)(theme)
+        continue
+      }
+
+      const prop = get(aliases, key, key)
+      const scaleName = get(scales, prop)
+      const scale = get(theme, scaleName, get(theme, prop, {}))
+      const transform = get(transforms, prop, get)
+      const value = transform(scale, val, val)
+
+      if (multiples[prop]) {
+        const dirs = multiples[prop]
+
+        for (let i = 0; i < dirs.length; i++) {
+          result[dirs[i]] = value
+        }
+      } else {
+        result[prop] = value
+      }
     }
+
+    return result
   }
-
-  return result
-}
-
-export default css

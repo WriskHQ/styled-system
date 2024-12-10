@@ -1,22 +1,23 @@
 import assign from 'object-assign'
 import { merge } from './merge'
 import { get } from './get'
+import { ConfigStyle, Scale, StyleFunction } from '../types'
 
-const createMediaQuery = (n) => `@media screen and (min-width: ${n})`
+const createMediaQuery = (n: string) => `@media screen and (min-width: ${n})`
 
 const defaults = {
   breakpoints: [40, 52, 64].map((n) => n + 'em'),
 }
 
 // sort object-value responsive styles
-const sort = (obj) => {
+const sort = (obj: Record<string, unknown>) => {
   const next = {}
   Object.keys(obj)
     .sort((a, b) =>
       a.localeCompare(b, undefined, {
         numeric: true,
         sensitivity: 'base',
-      })
+      }),
     )
     .forEach((key) => {
       next[key] = obj[key]
@@ -24,7 +25,13 @@ const sort = (obj) => {
   return next
 }
 
-const parseResponsiveStyle = (mediaQueries, sx, scale, raw, _props) => {
+const parseResponsiveStyle = (
+  mediaQueries: Array<string | null>,
+  sx: StyleFunction,
+  scale: Scale,
+  raw: Array<string | number>,
+  _props: unknown,
+) => {
   let styles = {}
   raw.slice(0, mediaQueries.length).forEach((value, i) => {
     const media = mediaQueries[i]
@@ -40,7 +47,13 @@ const parseResponsiveStyle = (mediaQueries, sx, scale, raw, _props) => {
   return styles
 }
 
-const parseResponsiveObject = (breakpoints, sx, scale, raw, _props) => {
+const parseResponsiveObject = (
+  breakpoints: Array<string>,
+  sx: StyleFunction,
+  scale: Scale,
+  raw: Array<string | number>,
+  _props: unknown,
+) => {
   let styles = {}
   for (let key in raw) {
     const breakpoint = breakpoints[key]
@@ -58,9 +71,16 @@ const parseResponsiveObject = (breakpoints, sx, scale, raw, _props) => {
   return styles
 }
 
-export const createParser = (config) => {
-  const cache = {}
-  const parse = (props) => {
+export type ParserCache = Partial<{
+  breakpoints: Array<string>
+  media: Array<null | string>
+}>
+
+export const createParser = (config: ConfigStyle): StyleFunction => {
+  const cache: ParserCache = {}
+
+  //TODO (MK): Find the real type for this
+  const parse = (props: any) => {
     let styles = {}
     let shouldSort = false
     const isCacheDisabled = props.theme && props.theme.disableStyledSystemCache
@@ -73,24 +93,14 @@ export const createParser = (config) => {
 
       if (typeof raw === 'object') {
         cache.breakpoints =
-          (!isCacheDisabled && cache.breakpoints) ||
-          get(props.theme, 'breakpoints', defaults.breakpoints)
+          (!isCacheDisabled && cache.breakpoints) || get(props.theme, 'breakpoints', defaults.breakpoints)
         if (Array.isArray(raw)) {
-          cache.media = (!isCacheDisabled && cache.media) || [
-            null,
-            ...cache.breakpoints.map(createMediaQuery),
-          ]
-          styles = merge(
-            styles,
-            parseResponsiveStyle(cache.media, sx, scale, raw, props)
-          )
+          cache.media = (!isCacheDisabled && cache.media) || [null, ...cache.breakpoints.map(createMediaQuery)]
+          styles = merge(styles, parseResponsiveStyle(cache.media, sx, scale, raw, props))
           continue
         }
         if (raw !== null) {
-          styles = merge(
-            styles,
-            parseResponsiveObject(cache.breakpoints, sx, scale, raw, props)
-          )
+          styles = merge(styles, parseResponsiveObject(cache.breakpoints, sx, scale, raw, props))
           shouldSort = true
         }
         continue
@@ -106,6 +116,7 @@ export const createParser = (config) => {
 
     return styles
   }
+
   parse.config = config
   parse.propNames = Object.keys(config)
   parse.cache = cache

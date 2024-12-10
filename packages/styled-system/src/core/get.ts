@@ -1,8 +1,4 @@
-export function get<T = string | number>(
-  obj: object,
-  path: string | number,
-  fallback?: string | number | T
-): T {
+export function get<T = string | number>(obj: object, path: string | number, fallback?: string | number | T): T {
   const key = typeof path === 'string' ? path.split('.') : [path]
 
   let result: object = obj

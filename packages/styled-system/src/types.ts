@@ -23,24 +23,12 @@ export interface ConfigFunction {
 }
 
 export interface ConfigStyle {
-  /** The CSS property to use in the returned style object (overridden by `properties` if present). */
   property?: keyof CSS.Properties | undefined
-  /**
-   * An array of multiple properties (e.g. `['marginLeft', 'marginRight']`) to which this style's value will be
-   * assigned (overrides `property` when present).
-   */
   properties?: Array<keyof CSS.Properties> | undefined
-  /** A string referencing a key in the `theme` object. */
   scale?: string | undefined
-  /** A fallback scale object for when there isn't one defined in the `theme` object. */
   defaultScale?: Scale | undefined
-  /** A function to transform the raw value based on the scale. */
   transform?: TransformType | undefined
 }
-
-export type Config = Partial<
-  Record<keyof CSS.Properties, ConfigStyle | ConfigFunction | boolean>
->
 
 export interface StyleFunction {
   (...args: any[]): any
@@ -49,3 +37,47 @@ export interface StyleFunction {
   propNames?: string[] | undefined
   cache?: object | undefined
 }
+
+export type TLengthStyledSystem = string | 0 | number
+
+export interface Theme<TLength = TLengthStyledSystem> {
+  breakpoints?: ObjectOrArray<number | string | symbol>
+  mediaQueries?: { [size: string]: string }
+  space?: ObjectOrArray<CSS.Property.Margin<number | string>>
+  fontSizes?: ObjectOrArray<CSS.Property.FontSize<number>>
+  colors?: ObjectOrArray<CSS.Property.Color>
+  fonts?: ObjectOrArray<CSS.Property.FontFamily>
+  fontWeights?: ObjectOrArray<CSS.Property.FontWeight>
+  lineHeights?: ObjectOrArray<CSS.Property.LineHeight<TLength>>
+  letterSpacings?: ObjectOrArray<CSS.Property.LetterSpacing<TLength>>
+  sizes?: ObjectOrArray<CSS.Property.Height<{}> | CSS.Property.Width<{}>>
+  borders?: ObjectOrArray<CSS.Property.Border<{}>>
+  borderStyles?: ObjectOrArray<CSS.Property.Border<{}>>
+  borderWidths?: ObjectOrArray<CSS.Property.BorderWidth<TLength>>
+  radii?: ObjectOrArray<CSS.Property.BorderRadius<TLength>>
+  shadows?: ObjectOrArray<CSS.Property.BoxShadow>
+  zIndices?: ObjectOrArray<CSS.Property.ZIndex>
+  buttons?: ObjectOrArray<CSS.StandardProperties>
+  colorStyles?: ObjectOrArray<CSS.StandardProperties>
+  textStyles?: ObjectOrArray<CSS.StandardProperties>
+}
+
+export type RequiredTheme = Required<Theme>
+
+export type ThemeValue<
+  K extends keyof ThemeType,
+  ThemeType,
+  TVal = any,
+> = ThemeType[K] extends TVal[]
+  ? number
+  : ThemeType[K] extends Record<infer E, TVal>
+    ? E
+    : ThemeType[K] extends ObjectOrArray<infer F>
+      ? F
+      : never
+
+export type ResponsiveValue<T, ThemeType extends Theme = RequiredTheme> =
+  | T
+  | null
+  | Array<T | null>
+  | { [key in (ThemeValue<'breakpoints', ThemeType> & string) | number]?: T }
