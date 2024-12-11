@@ -1,14 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-import {
-  space,
-  color,
-  fontSize,
-  width,
-  fontWeight,
-  lineHeight,
-} from 'styled-system'
+import { space, color, fontSize, width, fontWeight, lineHeight } from 'styled-system'
 
 const Style = createGlobalStyle`
   * { box-sizing: border-box; }
@@ -19,14 +12,7 @@ const theme = {
   fontSizes: [12, 14, 16, 24, 32, 48, 64, 96, 128],
   space: [
     // margin and padding
-    0,
-    4,
-    8,
-    16,
-    32,
-    64,
-    128,
-    256,
+    0, 4, 8, 16, 32, 64, 128, 256,
   ],
   colors: {
     blue: '#07c',
@@ -34,7 +20,7 @@ const theme = {
   },
 }
 
-const Root = styled.div`
+const Root = styled.div(css({}))`
   font-family: system-ui, sans-serif;
   line-height: 1.5;
 `
@@ -81,9 +67,9 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <Root>
           <Style />
-          <Box px={[3, 4]} py={[5, 6]} color="white" bg="blue">
+          <Box px={[3, 4]} py={[5, 6]} color='white' bg='blue'>
             <Heading fontSize={[4, 5, 6]}>styled-system</Heading>
-            <Text fontWeight="bold">Basic demo</Text>
+            <Text fontWeight='bold'>Basic demo</Text>
           </Box>
         </Root>
       </ThemeProvider>

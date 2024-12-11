@@ -12,9 +12,8 @@
     "sirv-cli": "^0.4.4"
   },
   "dependencies": {
-    "@wrisk/styled-system": "^5.0.13",
     "emotion": "^10.0.9",
-    "@wrisk/styled-system": "^5.0.15",
+    "@wrisk/styled-system": "^5.0.13",
     "svelte": "^3.0.0"
   },
   "scripts": {
