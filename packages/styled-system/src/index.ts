@@ -34,4 +34,6 @@ export {
   ColorStyleProps,
 } from './variant'
 
+export { compose, system, get, SystemConfig } from './core'
+
 export { css, responsive } from './css'

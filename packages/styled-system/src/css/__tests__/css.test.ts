@@ -1,6 +1,9 @@
 import { css } from '..'
+import { Theme } from '../../types'
+import { SystemStyleObject } from '../types'
 
-const theme = {
+// TODO (MK): Sort out the typing here
+const theme: Theme = {
   colors: {
     primary: 'tomato',
     secondary: 'cyan',
@@ -50,7 +53,7 @@ const theme = {
   radii: {
     small: 5,
   },
-}
+} as unknown as Theme
 
 describe('background', () => {
   it('returns a function', () => {
@@ -320,6 +323,7 @@ describe('background', () => {
   })
 
   it('returns individual border styles', () => {
+    // TODO (MK): Sort out the typing here
     const result = css({
       borderTopWidth: 'thin',
       borderTopColor: 'primary',
@@ -337,7 +341,7 @@ describe('background', () => {
       borderLeftWidth: 'thin',
       borderLeftColor: 'primary',
       borderLeftStyle: 'thick',
-    })(theme)
+    } as SystemStyleObject)(theme)
     expect(result).toEqual({
       borderTopColor: 'tomato',
       borderTopWidth: 1,

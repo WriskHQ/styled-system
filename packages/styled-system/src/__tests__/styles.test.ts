@@ -1,16 +1,4 @@
-import {
-  color,
-  width,
-  layout,
-  fontSize,
-  size,
-  gridGap,
-  gridRowGap,
-  gridColumnGap,
-  border,
-  shadow,
-  compose,
-} from '../src'
+import { color, layout, border, shadow, compose, typography, grid } from '..'
 
 const theme = {
   colors: {
@@ -43,37 +31,37 @@ describe('styles', () => {
   })
 
   it('returns a pixel font-size', () => {
-    const a = fontSize({ fontSize: 48 })
+    const a = typography({ fontSize: 48 })
     expect(a).toEqual({ fontSize: 48 })
   })
 
   it('uses a default font-size scale', () => {
-    const a = fontSize({ fontSize: 2 })
+    const a = typography({ fontSize: 2 })
     expect(a).toEqual({ fontSize: 16 })
   })
 
   it('returns a string font-size', () => {
-    const a = fontSize({ fontSize: '2em' })
+    const a = typography({ fontSize: '2em' })
     expect(a).toEqual({ fontSize: '2em' })
   })
 
   it('returns a percentage based width', () => {
-    const a = width({ width: 1 / 2 })
+    const a = layout({ width: 1 / 2 })
     expect(a).toEqual({ width: '50%' })
   })
 
   it('returns a pixel based width', () => {
-    const a = width({ width: 256 })
+    const a = layout({ width: 256 })
     expect(a).toEqual({ width: 256 })
   })
 
   it('returns a string width', () => {
-    const a = width({ width: 'auto' })
+    const a = layout({ width: 'auto' })
     expect(a).toEqual({ width: 'auto' })
   })
 
   it('returns a width based on theme.sizes', () => {
-    const a = width({
+    const a = layout({
       theme: {
         sizes: [24, 48],
       },
@@ -83,7 +71,7 @@ describe('styles', () => {
   })
 
   it('returns fractional responsive widths', () => {
-    const a = width({
+    const a = layout({
       width: [1, 1 / 2, 1 / 4],
     })
     expect(a).toEqual({
@@ -98,7 +86,7 @@ describe('styles', () => {
   })
 
   it('size returns width and height', () => {
-    const styles = size({
+    const styles = layout({
       size: 4,
     })
     expect(styles).toEqual({ width: 4, height: 4 })
@@ -106,7 +94,7 @@ describe('styles', () => {
 
   // grid
   it('gridGap returns a scalar style', () => {
-    const a = gridGap({
+    const a = grid({
       theme: {
         space: [0, 2, 4, 8],
       },
@@ -116,7 +104,7 @@ describe('styles', () => {
   })
 
   it('gridGap uses the default scale', () => {
-    const a = gridGap({
+    const a = grid({
       theme: {},
       gridGap: 2,
     })
@@ -124,7 +112,7 @@ describe('styles', () => {
   })
 
   it('gridRowGap returns a scalar style', () => {
-    const a = gridRowGap({
+    const a = grid({
       theme: {
         space: [0, 2, 4, 8],
       },
@@ -134,7 +122,7 @@ describe('styles', () => {
   })
 
   it('gridRowGap uses the default scale', () => {
-    const a = gridRowGap({
+    const a = grid({
       theme: {},
       gridRowGap: 2,
     })
@@ -142,7 +130,7 @@ describe('styles', () => {
   })
 
   it('gridColumnGap returns a scalar style', () => {
-    const a = gridColumnGap({
+    const a = grid({
       theme: {
         space: [0, 2, 4, 8],
       },
@@ -152,7 +140,7 @@ describe('styles', () => {
   })
 
   it('gridColumnGap uses the default scale', () => {
-    const a = gridColumnGap({
+    const a = grid({
       theme: {},
       gridColumnGap: 2,
     })
