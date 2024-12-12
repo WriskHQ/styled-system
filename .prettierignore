@@ -1,2 +1,6 @@
-.cache
-public
+.circleci
+.github
+.idea
+.yarn
+docs
+dist

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@styled-system/docs",
+  "name": "@wrisk/styled-docs",
   "version": "5.0.0-8",
   "scripts": {
     "start": "gatsby develop",

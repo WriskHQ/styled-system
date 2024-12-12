@@ -2,12 +2,29 @@
   "name": "@wrisk/styled-system",
   "version": "5.1.5",
   "description": "Responsive, theme-based style props for building design systems with React",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "author": "Brent Jackson",
+  "license": "MIT",
+  "main": "dist/wrisk-styled-system.cjs.js",
+  "module": "dist/wrisk-styled-system.esm.js",
+  "types": "dist/wrisk-styled-system.cjs.d.ts",
+  "preconstruct": {
+    "entrypoints": [
+      "index.ts"
+    ]
+  },
+  "files": [
+    "src",
+    "dist",
+    "module",
+    "LICENSE.md",
+    "README.md"
+  ],
   "keywords": [
+    "typescript",
     "react",
     "css-in-js",
-    "styled-components"
+    "styled-components",
+    "design-system"
   ],
   "scripts": {
     "build": "tsc -b",
@@ -19,9 +36,8 @@
       "**/__tests__/*.test.ts"
     ]
   },
-  "author": "Brent Jackson",
-  "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "7.20.7",
     "@emotion/core": "^10.0.10",
     "@emotion/is-prop-valid": "^0.8.1",
     "@emotion/memoize": "^0.7.1",
@@ -30,16 +46,16 @@
     "lodash.merge": "^4.6.1",
     "lodash.omit": "^4.5.0",
     "lodash.set": "^4.3.2",
-    "object-assign": "^4.1.1",
     "prop-types": "^15.7.2"
   },
-  "gitHead": "a6feb6009c58f2eb68f0c3120c5672f6cb54294f",
   "devDependencies": {
     "@emotion/styled": "^10.0.14",
-    "@types/object-assign": "^4.0.33",
     "csstype": "^3.0.2",
     "jest-styled-components": "^7.0.0",
     "styled-components": "^5.0.0",
     "typescript": "^5.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

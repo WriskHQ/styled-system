@@ -1,71 +1,55 @@
 {
   "private": true,
+  "name": "styled-system",
+  "packageManager": "yarn@3.4.1",
   "workspaces": [
     "packages/*",
     "examples/*"
   ],
+  "preconstruct": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "scripts": {
+    "postinstall": "preconstruct dev",
     "prettier": "prettier \"packages/**/{src,test,examples}/**/*.js\" --write",
-    "prettier:docs": "prettier \"docs/**/*.{js,md}\" --write",
-    "clean": "lerna exec -- rm -rf dist",
-    "prepare": "yarn build:cjs && yarn build:esm",
-    "build:cjs": "NODE_ENV=cjs lerna exec -- babel src -d dist --root-mode upward",
-    "build:esm": "NODE_ENV=esm lerna exec -- babel src -o dist/index.esm.js --root-mode upward",
-    "bootstrap": "lerna bootstrap",
-    "publish": "lerna publish",
-    "logo": "npx repng docs/src/logo/index.js -d docs/static -f logo.png -w 512 -h 512",
-    "logo-svg": "npx scrs docs/src/logo/index.js --svg > docs/static/logo.svg",
-    "logo-white": "npx scrs docs/src/logo/white.js --svg > docs/static/logo-white.svg",
-    "benchmark": "yarn workspace benchmarks test",
-    "cover": "yarn test --coverage",
-    "codecov": "yarn cover && npx codecov",
-    "start": "yarn workspace @styled-system/docs start",
-    "docs": "yarn workspace @styled-system/docs start",
-    "docs:build": "yarn workspace @styled-system/docs build",
+    "build": "preconstruct build",
+    "docs": "yarn workspace @wrisk/styled-docs start",
+    "docs:build": "yarn workspace @wrisk/styled-docs build",
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.4.0",
-    "@babel/plugin-transform-runtime": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.4.0",
+    "@babel/core": "7.20.12",
+    "@babel/plugin-proposal-decorators": "7.20.7",
+    "@babel/plugin-transform-runtime": "7.19.6",
+    "@babel/preset-env": "7.20.2",
+    "@babel/preset-typescript": "7.18.6",
+    "@preconstruct/cli": "2.3.0",
     "@types/jest": "^29.5.14",
-    "@types/react-test-renderer": "^16.9.3",
-    "@types/styled-components": "^5.1.34",
-    "husky": "^4.0.10",
+    "eslint": "8.31.0",
+    "eslint-import-resolver-typescript": "3.5.2",
+    "eslint-plugin-import": "2.26.0",
     "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
-    "lerna": "^3.13.4",
     "lint-staged": "^10.0.0",
-    "prettier": "3.4.2",
-    "react": "^16.8.5",
-    "react-test-renderer": "^16.8.5"
+    "prettier": "^3.4.2",
+    "ts-jest": "^29.2.5"
   },
   "jest": {
     "preset": "ts-jest",
     "testMatch": [
       "**/packages/**/__tests__/*.test.ts"
-    ],
-    "collectCoverageFrom": [
-      "**/packages/**/__tests__/*.test.ts"
-    ],
-    "coverageReporters": [
-      "lcov",
-      "text",
-      "html"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jxnblk/styled-system.git"
+    "url": "git@github.com:WriskHQ/styled-system.git"
   },
   "lint-staged": {
-    "*.{js,md}": [
+    "*.{js,jsx,ts,tsx}": [
+      "eslint . --fix",
       "prettier --write",
       "git add"
     ]
-  },
-  "dependencies": {}
+  }
 }

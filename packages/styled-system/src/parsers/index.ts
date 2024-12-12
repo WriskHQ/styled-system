@@ -54,4 +54,4 @@ export const all = compose(
   colorStyle,
 )
 
-export const regex = new RegExp(`^(${all.propNames.join('|')})$`)
+export const regex = new RegExp(`^(${all.propNames?.join('|')})$`)
