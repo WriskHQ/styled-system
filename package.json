@@ -12,8 +12,9 @@
     ]
   },
   "scripts": {
+    "compile": "tsc -b",
     "postinstall": "preconstruct dev",
-    "prettier": "prettier \"packages/**/{src,test,examples}/**/*.js\" --write",
+    "prettier": "prettier packages/**/{src,test}/**/*.{ts,tsx} --write",
     "build": "preconstruct build",
     "docs": "yarn workspace @wrisk/styled-docs start",
     "docs:build": "yarn workspace @wrisk/styled-docs build",

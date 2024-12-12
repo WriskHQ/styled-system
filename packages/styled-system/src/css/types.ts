@@ -12,10 +12,7 @@ export interface CSSProperties
 
 export type CSSPseudoSelectorProps = { [K in CSS.Pseudos]?: SystemStyleObject }
 
-export interface CSSObject
-  extends CSSPropertiesWithMultiValues,
-    CSSPseudosForCSSObject,
-    CSSOthersObjectForCSSObject {}
+export interface CSSObject extends CSSPropertiesWithMultiValues, CSSPseudosForCSSObject, CSSOthersObjectForCSSObject {}
 
 export type CSSPropertiesWithMultiValues = {
   [K in keyof CSSProperties]: CSSProperties[K]
@@ -93,6 +90,4 @@ export type SystemStyleObject =
   | EmotionLabel
   | null
 
-export type CssFunctionReturnType = (
-  props?: Theme | { theme: Theme }
-) => CSSObject
+export type CssFunctionReturnType = (props?: Theme | { theme: Theme }) => CSSObject
