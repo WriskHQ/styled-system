@@ -3,13 +3,8 @@
     "target": "es2020",
     "module": "esnext",
     "moduleResolution": "node",
-    "isolatedModules": false,
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-    "importHelpers": true,
-    "removeComments": true,
-    "allowJs": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "jsx": "react",
     "noUnusedLocals": true,
     "skipLibCheck": true,
@@ -20,11 +15,6 @@
       "jest"
     ]
   },
-  "files": [
-    "babel.config.js",
-    "jest.config.js",
-    "jest.dist.js"
-  ],
   "include": [
     "packages"
   ],
