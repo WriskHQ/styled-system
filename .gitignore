@@ -3,9 +3,12 @@ node_modules
 .nyc_output
 coverage*
 site
-public
 package-lock.json
 tsconfig.tsbuildinfo
+
+# docs
+
+docs/public
 
 # yarn v2
 

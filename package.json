@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "styled-system",
-  "packageManager": "yarn@3.4.1",
+  "packageManager": "yarn@3.8.6",
   "workspaces": [
     "packages/*",
     "examples/*"
